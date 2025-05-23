@@ -43,7 +43,8 @@ try {
   return res.status(200).json({ message: 'new employee account created',token });
 } catch (error) {
   return res.status(500).json({
-    message:'internal server error'
+    message:'internal server error',
+    erromessage:error
   })
 }
 });
