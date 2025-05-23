@@ -4,7 +4,7 @@ const jwt = require('jsonwebtoken');
 //const User = require('../models/User.js');
 const Employee = require('../models/Employee.js');
 const upload = require('../middleware/multer.js');
-const uploadOnCloudinary = require('../utils/uploadOnCloudinary.js')
+const uploadOnCloudinaryBuffer = require('../utils/uploadOnCloudinary.js')
 const router = express.Router();
 
 
@@ -26,13 +26,17 @@ router.post('/login', async (req, res) => {
 // Register (optional - for testing)
 router.post('/register',upload.single('avatar') ,async (req, res) => {
 try {
-  const avatar = req.file;
+  //const avatar = req.file;
     const { name, email, password, role,salary,department } = req.body;
-    console.log(avatar)
-    console.log(req.body)
+   
 
-   //const image_url = await uplaodOnCloudinary(avatar.path)
-   const image_url = await uploadOnCloudinary(avatar.path);
+     const avatarBuffer = req.file?.buffer;
+
+    if (!avatarBuffer) {
+      return res.status(400).json({ message: 'Avatar file is missing.' });
+    }
+
+    const image_url = await uploadOnCloudinaryBuffer(avatarBuffer);
 
    console.log(image_url)
   //console.log(req.body);

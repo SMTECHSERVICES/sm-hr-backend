@@ -40,3 +40,46 @@ const uploadFileOnCloudinary = async(localfilePath)=>{
 }
 
 module.exports = uploadFileOnCloudinary;
+
+// const dotenv = require('dotenv');
+// const { randomUUID } = require('crypto');
+// const { v2: cloudinary } = require('cloudinary');
+// const { Readable } = require('stream');
+
+// dotenv.config();
+
+// cloudinary.config({ 
+//   cloud_name: process.env.CLOUDINARY_CLOUD_NAME, 
+//   api_key: process.env.CLOUDINARY_API_KEY, 
+//   api_secret: process.env.CLOUDINARY_API_SECRET,
+// });
+
+// const uploadFileOnCloudinary = async (buffer, filename = 'file.pdf') => {
+//   if (!buffer) return;
+
+//   return new Promise((resolve, reject) => {
+//     const stream = cloudinary.uploader.upload_stream(
+//       {
+//         public_id: randomUUID(),
+//         resource_type: 'raw', // important for PDFs, ZIPs, etc.
+//         type: 'upload',
+//         filename_override: filename, // helps retain original file name
+//       },
+//       (error, result) => {
+//         if (error) {
+//           console.error('Cloudinary upload error:', error);
+//           return reject(null);
+//         }
+//         resolve(result.secure_url);
+//       }
+//     );
+
+//     const readable = new Readable();
+//     readable._read = () => {};
+//     readable.push(buffer);
+//     readable.push(null);
+//     readable.pipe(stream);
+//   });
+// };
+
+// module.exports = uploadFileOnCloudinary;
