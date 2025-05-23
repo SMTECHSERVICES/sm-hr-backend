@@ -4,7 +4,7 @@ const jwt = require('jsonwebtoken');
 //const User = require('../models/User.js');
 const Employee = require('../models/Employee.js');
 const upload = require('../middleware/multer.js');
-const uplaodOnCloudinary = require('../utils/uploadOnCloudinary.js')
+const uploadOnCloudinary = require('../utils/uploadOnCloudinary.js')
 const router = express.Router();
 
 
@@ -31,7 +31,9 @@ try {
     console.log(avatar)
     console.log(req.body)
 
-   const image_url = await uplaodOnCloudinary(avatar.path)
+   //const image_url = await uplaodOnCloudinary(avatar.path)
+   const image_url = await uploadOnCloudinary(avatar.path);
+
    console.log(image_url)
   //console.log(req.body);
   const hashedPassword = bcrypt.hashSync(password, 10);
